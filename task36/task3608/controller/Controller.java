@@ -17,8 +17,9 @@ public class Controller {
         this.model = model;
     }
 
-    public void onShowAllUsers(){
+    public void onShowAllUsers() {
         model.loadUsers();
+
         usersView.refresh(model.getModelData());
     }
 
@@ -26,9 +27,23 @@ public class Controller {
         model.loadDeletedUsers();
         usersView.refresh(model.getModelData());
     }
+    public void onOpenUserEditForm(long userId) {
+        model.loadUserById(userId);
+        editUserView.refresh(model.getModelData());
+    }
+
+    public void onUserDelete(long id) {
+        model.deleteUserById(id);
+        usersView.refresh(model.getModelData());
+    }
+
+    public void onUserChange(String name, long id, int level)
+    {
+        model.changeUserData(name,id,level);
+        usersView.refresh(model.getModelData());
+    }
 
     public void setUsersView(UsersView usersView) {
         this.usersView = usersView;
     }
-
 }
